@@ -1,0 +1,40 @@
+{% extends "../common/base.html" %}
+
+{% block style %}{% endblock %}
+
+{% block title %}게시글 목록{% endblock %}
+
+{% block content %}
+<!-- 등록 버튼 -->
+<div>
+    <a href="{% url 'board:create' %}" class="btn btn-primary">게시글 등록</a>
+</div>
+<!--// 등록 버튼 -->
+
+<!-- 게시글 목록 -->
+<table class="table table-bordered mt-3">
+    <thead>
+        <tr class="text-center">
+            <th>순번</th>
+            <th>제목</th>
+            <th>글쓴이</th>
+            <th>등록일시</th>
+            <th>수정일시</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for board in boards %}
+        <tr>
+            <td class="text-center">{{ board.id }}</td>
+            <td><a href="{% url 'board:read' board_id=board.id %}">{{ board.title }}</a></td>
+            <td class="text-center">{{ board.username }}</td>
+            <td class="text-center">{{ board.created_at | date:"Y-m-d H:i" }}</td>
+            <td class="text-center">{{ board.updated_at | date:"Y-m-d H:i" }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<!--// 게시글 목록 -->
+{% endblock %}
+
+{% block script %}{% endblock %}

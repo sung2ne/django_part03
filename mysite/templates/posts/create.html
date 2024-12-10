@@ -1,0 +1,39 @@
+{% extends "../base.html" %}
+
+{% block style %}{% endblock %}
+
+{% block title %}게시글 등록{% endblock %}
+
+{% block content %}
+<!-- 게시글 등록 -->
+<div class="card">
+    <div class="card-body">
+        <form id="createForm" method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="title" class="form-label">제목</label>
+                <input type="text" id="title" name="title" class="form-control" placeholder="제목을 입력하세요." value="{{ form.title.value|default_if_none:'' }}">
+            </div>
+            <div class="mb-3">
+                <label for="content" class="form-label">내용</label>
+                <textarea rows="10" id="content" name="content" class="form-control" placeholder="내용을 입력하세요.">{{ form.content.value|default_if_none:'' }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="created_by" class="form-label">글쓴이</label>
+                <input type="text" id="created_by" name="created_by" class="form-control" placeholder="글쓴이를 입력하세요." value="{{ form.created_by.value|default_if_none:'' }}">
+            </div>
+            <div class="mb-3">
+                <label for="passwd" class="form-label">비밀번호</label>
+                <input type="password" id="passwd" name="passwd" class="form-control" placeholder="비밀번호를 입력하세요.">
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary">게시글 등록</button>
+                <a href="{% url 'board:list' %}" class="btn btn-danger">등록 취소</a>
+            </div>
+        </form>
+    </div>
+</div>
+<!--// 게시글 등록 -->
+{% endblock %}
+
+{% block script %}{% endblock %}
