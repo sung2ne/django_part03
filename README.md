@@ -1,5 +1,29 @@
 # 소설처럼 읽는 장고 웹 프레임워크
 
-## PART 3. 게시판 만들기
+## PART 03. 게시글 관리 앱 만들기
 
-https://wikidocs.net/edit/page/267752
+https://wikidocs.net/267752
+
+## 패키지 설치
+
+```bash
+pip install django
+```
+
+## 프로젝트 생성
+
+```bash
+django-admin startproject mysite
+```
+
+## 마이그레이션
+
+```bash
+python manage.py migrate
+```
+
+## 서버 실행
+
+```bash
+python manage.py runserver
+```
