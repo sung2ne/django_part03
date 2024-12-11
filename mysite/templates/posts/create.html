@@ -1,9 +1,5 @@
 {% extends "../base.html" %}
 
-{% block style %}{% endblock %}
-
-{% block page_title %}{% endblock %}
-
 {% block content %}
 <div class="row">
     <div class="col-12">
@@ -55,12 +51,10 @@
             </div>
             <div>
                 <button type="submit" class="btn btn-primary">등록</button>
-                <a href="{% url 'posts:list' %}" class="btn btn-danger">취소</a>
+                <a href="{% url 'posts:list' %}" class="btn btn-secondary">취소</a>
             </div>
         </form>
         <!--// 게시글 등록 -->
     </div>
 </div>
 {% endblock %}
-
-{% block script %}{% endblock %}

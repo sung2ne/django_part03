@@ -54,7 +54,7 @@
         <!-- 메시지 -->
         {% if messages %}
             <div class="row">
-                <div class="{{ message_class }}">
+                <div class="{% if message_class %}{{ message_class }}{% else %}col-12{% endif %}">
                     {% for message in messages %}
                         {% if message.tags == "error" %}
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
