@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <style>
         body {
-            padding-top: 70px;
+            padding-top: 80px;
         }
     </style>
     {% block style %}{% endblock %}
@@ -46,29 +46,41 @@
             </div>
         </nav>
         <!--// 네비게이션 -->
+
+        <!-- 페이지 제목 -->
+        {% block page_title %}{% endblock %}
+        <!--// 페이지 제목 -->
         
         <!-- 메시지 -->
         {% if messages %}
-            {% for message in messages %}
-                {% if message.tags == "error" %}
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    {{ message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <div class="row">
+                <div class="{{ message_class }}">
+                    {% for message in messages %}
+                        {% if message.tags == "error" %}
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endif %}
+                        {% if message.tags == "success" %}
+                            <div class="row">
+                                <div class="{{ message_class }}">
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        {{ message }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
                 </div>
-                {% endif %}
-                {% if message.tags == "success" %}
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        {{ message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                {% endif %}
-            {% endfor %}
+            </div>
         {% endif %}
         <!--// 메시지 -->
 
-        <h1>{% block title %}{% endblock %}</h1>
-
-        <div>{% block content %}{% endblock %}</div>
+        <!-- 페이지 내용 -->
+        {% block content %}{% endblock %}
+        <!--// 페이지 내용 -->
     </div>
 
     <!-- Bootstrap JS -->

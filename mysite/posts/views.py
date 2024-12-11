@@ -7,6 +7,11 @@ from .forms import PostCreateForm, PostUpdateForm
 
 # 게시글 등록
 def posts_create(request):
+    context = {
+        'form': PostCreateForm(),
+        'message_class': 'col-12'
+    }
+    
     if request.method == 'POST':
         form = PostCreateForm(request.POST)
         
@@ -16,11 +21,10 @@ def posts_create(request):
             messages.success(request, '게시글이 등록되었습니다.')
             return redirect("posts:read", post_id=post.id)
         else:
-            for field_name, error_messages in form.errors.items():
-                messages.error(request, f"{form.fields[field_name].label}: {error_messages[0]}")
+            context['form'] = form
+            messages.error(request, '게시글 등록에 실패했습니다.')
 
-    form = PostCreateForm()        
-    return render(request, 'board/create.html', {'form': form})
+    return render(request, 'posts/create.html', context)
 
 # 게시글 보기
 def posts_read(request, post_id):

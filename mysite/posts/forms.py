@@ -3,9 +3,14 @@ from .models import Posts
 
 # 게시글 등록 폼
 class PostCreateForm(forms.ModelForm):
+    title = forms.CharField(required=False)
+    content = forms.CharField(required=False)
+    username = forms.CharField(required=False)
+    password = forms.CharField(required=False)
+    
     class Meta:
         model = Posts
-        fields = ['title', 'content', 'passwd', 'username']
+        fields = ['title', 'content', 'password', 'username']
         
     # 제목 검증
     def clean_title(self):
@@ -26,15 +31,15 @@ class PostCreateForm(forms.ModelForm):
         return content
         
     # 비밀번호 검증
-    def clean_passwd(self):
-        passwd = self.cleaned_data['passwd']
-        if not passwd:
+    def clean_password(self):
+        password = self.cleaned_data['password']
+        if not password:
             raise forms.ValidationError("비밀번호를 입력해주세요.")
-        if len(passwd) < 4:
+        if len(password) < 4:
             raise forms.ValidationError("비밀번호는 최소 4자 이상 입력해주세요.")
-        if len(passwd) > 20:
+        if len(password) > 20:
             raise forms.ValidationError("비밀번호는 최대 20자 이하로 입력해주세요.")
-        return passwd
+        return password
     
     # 글쓴이 검증
     def clean_username(self):
@@ -51,7 +56,7 @@ class PostCreateForm(forms.ModelForm):
 class PostUpdateForm(forms.ModelForm):
     class Meta:
         model = Posts
-        fields = ['title', 'content', 'passwd', 'username']
+        fields = ['title', 'content', 'password', 'username']
         
     # 제목 검증
     def clean_title(self):
@@ -72,15 +77,15 @@ class PostUpdateForm(forms.ModelForm):
         return content
         
     # 비밀번호 검증
-    def clean_passwd(self):
-        passwd = self.cleaned_data['passwd']
-        if not passwd:
-            raise forms.ValidationError("비밀번호를 입력해주세요.")
-        if len(passwd) < 4:
+    def clean_password(self):
+        password = self.cleaned_data['password']
+        if not password:
+            raise forms.ValidationError("비밀번호를 입력해주��요.")
+        if len(password) < 4:
             raise forms.ValidationError("비밀번호는 최소 4자 이상 입력해주세요.")
-        if len(passwd) > 20:
+        if len(password) > 20:
             raise forms.ValidationError("비밀번호는 최대 20자 이하로 입력해주세요.")
-        return passwd
+        return password
     
     # 글쓴이 검증
     def clean_username(self):
