@@ -54,6 +54,11 @@ class PostCreateForm(forms.ModelForm):
 
 # 게시글 수정 폼
 class PostUpdateForm(forms.ModelForm):
+    title = forms.CharField(required=False)
+    content = forms.CharField(required=False)
+    username = forms.CharField(required=False)
+    password = forms.CharField(required=False)
+    
     class Meta:
         model = Posts
         fields = ['title', 'content', 'password', 'username']

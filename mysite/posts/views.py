@@ -6,6 +6,8 @@ from .forms import PostCreateForm, PostUpdateForm
 
 # 게시글 등록
 def posts_create(request):
+    form = PostCreateForm()
+    
     if request.method == 'POST':
         form = PostCreateForm(request.POST)
         
@@ -16,8 +18,7 @@ def posts_create(request):
             return redirect("posts:read", post_id=post.id)
         else:
             messages.error(request, '게시글 등록에 실패했습니다.')
-
-    form = PostCreateForm()
+    
     return render(request, 'posts/create.html', {'form': form})
 
 # 게시글 보기
@@ -28,6 +29,7 @@ def posts_read(request, post_id):
 # 게시글 수정
 def posts_update(request, post_id):
     post = get_object_or_404(Posts, id=post_id)    
+    form = PostUpdateForm(instance=post)
     
     if request.method == 'POST':
         form = PostUpdateForm(request.POST)
@@ -43,7 +45,6 @@ def posts_update(request, post_id):
         else:
             messages.error(request, '게시글 수정에 실패했습니다.')
 
-    form = PostUpdateForm(instance=post)
     return render(request, 'posts/update.html', {'form': form})
 
 # 게시글 삭제
