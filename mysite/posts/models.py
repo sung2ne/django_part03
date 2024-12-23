@@ -1,5 +1,6 @@
 from django.db import models
 
+# 게시글 모델
 class Posts(models.Model):
     title = models.CharField(verbose_name="제목", max_length=100)
     content = models.TextField(verbose_name="내용")
@@ -10,6 +11,8 @@ class Posts(models.Model):
     
     class Meta:
         db_table = 'posts'
+        verbose_name = "게시글"
+        verbose_name_plural = "게시글 목록"
 
     def __str__(self):
         return self.title
