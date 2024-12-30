@@ -5,7 +5,7 @@ from .models import Posts
 from .forms import PostCreateForm, PostUpdateForm
 
 # 게시글 등록
-def posts_create(request):
+def create_post(request):
     form = PostCreateForm()
     
     if request.method == 'POST':
@@ -22,12 +22,12 @@ def posts_create(request):
     return render(request, 'posts/create.html', {'form': form})
 
 # 게시글 보기
-def posts_read(request, post_id):
+def get_post(request, post_id):
     post = get_object_or_404(Posts, id=post_id)
     return render(request, 'posts/read.html', {'post': post})
 
 # 게시글 수정
-def posts_update(request, post_id):
+def update_post(request, post_id):
     post = get_object_or_404(Posts, id=post_id)    
     form = PostUpdateForm(instance=post)
     
@@ -48,7 +48,7 @@ def posts_update(request, post_id):
     return render(request, 'posts/update.html', {'form': form})
 
 # 게시글 삭제
-def posts_delete(request, post_id):
+def delete_post(request, post_id):
     post = get_object_or_404(Posts, id=post_id)
     password = request.POST.get('password')
     
@@ -62,6 +62,6 @@ def posts_delete(request, post_id):
             return redirect('posts:read', post_id=post.id)
 
 # 게시글 목록
-def posts_list(request):
+def get_posts(request):
     posts = Posts.objects.all().order_by('-created_at')
     return render(request, 'posts/list.html', {'posts': posts})
